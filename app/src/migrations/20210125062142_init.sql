@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS statuses(
+    ip TEXT PRIMARY KEY,
+    status TEXT NOT NULL,
+    timestamp TIMESTAMPTZ NOT NULL
+);
