@@ -1,9 +1,9 @@
 FROM rust:1.49-buster AS build
 WORKDIR /src
-COPY app/Cargo.lock app/Cargo.toml ./
+COPY Cargo.lock Cargo.toml ./
 RUN mkdir src && echo 'fn main() {}' > src/main.rs
 RUN cargo build --release
-COPY app/* ./
+COPY . .
 RUN cargo build --release
 
 FROM debian:buster-slim

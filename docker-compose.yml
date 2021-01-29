@@ -1,0 +1,32 @@
+# vim: set shiftwidth=2 tabstop=2 softtabstop=-1 expandtab:
+version: "3"
+services:
+  db:
+    image: postgres:13
+    restart: always
+    env_file: .env
+    ports:
+      - 6432:5432
+    restart: unless-stopped
+
+  node1:
+    build:
+      context:
+        app
+    env_file: .env
+    restart: unless-stopped
+
+  node2:
+    build:
+      context:
+        app
+    env_file: .env
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.19
+    ports:
+      - 8081:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped

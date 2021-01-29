@@ -322,8 +322,10 @@ dependencies = [
  "fakedata_generator",
  "log",
  "reqwest",
+ "retry",
  "serde 1.0.122",
  "sqlx",
+ "tokio",
 ]
 
 [[package]]
@@ -1854,6 +1856,15 @@ checksum = "52e44394d2086d010551b14b53b1f24e31647570cd1deb0379e2c21b329aba00"
 dependencies = [
  "hostname",
  "quick-error",
+]
+
+[[package]]
+name = "retry"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c15ef4789108d066d7fd85dcec330eab9b8e51244275922a9b7161afc4f46dda"
+dependencies = [
+ "rand 0.7.3",
 ]
 
 [[package]]

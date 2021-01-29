@@ -18,15 +18,32 @@ impl Repo {
 
         let repo = Repo { pool };
 
-        repo.migrate().await?;
+        repo.migrate().await.context("Failed to migrate db")?;
 
         Ok(repo)
     }
 
     async fn migrate(&self) -> Result<()> {
-        sqlx::migrate!("src/migrations")
-            .run(&self.pool)
-            .await?;
+        log::info!("Trying to migrate db");
+        let mut delay = std::time::Duration::from_millis(100);
+        loop {
+            let res = sqlx::migrate!("src/migrations")
+                .run(&self.pool)
+                .await;
+
+            match res {
+                Ok(_) => {
+                    log::info!("Successfully applied migrations");
+                    break;
+                },
+                Err(e) => {
+                    delay *= 2;
+                    log::error!("Failed to apply migrations: {:?}, sleeping {} seconds", e, delay.as_secs_f32());
+                }
+            }
+
+            tokio::time::delay_for(delay).await;
+        }
 
         Ok(())
     }

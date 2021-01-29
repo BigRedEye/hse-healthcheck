@@ -67,7 +67,7 @@ impl Node {
 
     async fn run_heartbeats(&self) -> ! {
         loop {
-            std::thread::sleep(std::time::Duration::from_millis(1000));
+            tokio::time::delay_for(std::time::Duration::from_millis(1000)).await;
             self.send_heartbeat().await;
         }
     }
