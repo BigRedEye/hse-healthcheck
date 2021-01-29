@@ -1,0 +1,8 @@
+spec:
+  containers:
+  - image: cr.yandex/crpi12e49mu5oaajskhn/nginx:latest
+    securityContext:
+      privileged: true
+    stdin: true
+    tty: true
+    

@@ -1,0 +1,14 @@
+spec:
+  containers:
+  - image: {{ image }}
+    securityContext:
+      privileged: true
+    stdin: true
+    tty: true
+    {% if env %}
+    env:
+    {% for key, value in env.items() %}
+    - name: {{ key }}
+      value: {{ value }}
+    {% endfor %}
+    {% endif %}

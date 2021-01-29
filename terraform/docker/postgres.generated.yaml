@@ -1,0 +1,17 @@
+spec:
+  containers:
+  - image: cr.yandex/crpi12e49mu5oaajskhn/postgres:latest
+    securityContext:
+      privileged: true
+    stdin: true
+    tty: true
+    
+    env:
+    
+    - name: POSTGRES_PASSWORD
+      value: aefac2e2d9fccd1
+    
+    - name: POSTGRES_USER
+      value: healthcheck
+    
+    

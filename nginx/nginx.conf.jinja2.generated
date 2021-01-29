@@ -1,0 +1,20 @@
+events {
+}
+
+http {
+    upstream backends {
+        
+          server healthcheck-0;
+        
+          server healthcheck-1;
+        
+          server healthcheck-2;
+        
+    }
+
+    server {
+        location / {
+            proxy_pass http://backends;
+        }
+    }
+}

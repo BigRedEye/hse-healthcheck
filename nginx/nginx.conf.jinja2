@@ -1,0 +1,16 @@
+events {
+}
+
+http {
+    upstream backends {
+        {% for backend in backends %}
+          server {{ backend }};
+        {% endfor %}
+    }
+
+    server {
+        location / {
+            proxy_pass http://backends;
+        }
+    }
+}
